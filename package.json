@@ -19,5 +19,11 @@
     "postcss-loader": "^2.1.1",
     "style-loader": "^0.20.2",
     "webpack": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
   }
 }
