@@ -3,15 +3,15 @@
  * https://github.com/HackerNews/API
  */
 
-const { get } = require('axios');
-const distanceInWords = require('date-fns/distance_in_words');
+const { getPage } = require('../util');
+const { getDistance } = require('./util');
 
 const base = 'https://hacker-news.firebaseio.com/v0';
 
-const getStories = () => get(`${base}/topstories.json?print=pretty`);
+const getStories = () => getPage(`${base}/topstories.json?print=pretty`);
 
 const getTopFive = async () => {
-  const { data: stories } = await getStories();
+  const stories = await getStories();
   // trim down stories to only 5
   stories.splice(5);
   return Promise.all(stories.map(story => get(`${base}/item/${story}.json?print=pretty`)));
@@ -24,7 +24,7 @@ const parseStories = async () => {
     .map(({ title, url, time }) => ({
       title,
       link: url,
-      published: distanceInWords(new Date(), new Date(time * 1000), { addSuffix: true }),
+      published: getDistance(time * 1000),
     }));
 };
 
