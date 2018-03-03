@@ -1,5 +1,5 @@
-const request = require('request-promise');
 const cheerio = require('cheerio');
+const { get } = require('axios');
 
 const soclist = 'https://membership.upsu.net/';
 
@@ -13,8 +13,8 @@ const membersDOM = '.label.bg.upsu';
  * pull the links out with some magic
  */
 const getLinks = async () => {
-  const htmlString = await request(soclist);
-  const $ = cheerio.load(htmlString);
+  const htmlString = await get(soclist);
+  const $ = cheerio.load(htmlString.data);
   const links = Array.from($(linkDOM));
   const socLinks = links.map(lnk => lnk.attribs.href);
   return socLinks;
@@ -67,8 +67,8 @@ const sortByMembers = (socA, socB) => {
  */
 const getMembers = async () => {
   const links = await getLinks();
-  const pages = await Promise.all(links.map(request));
-  return pages.map(parsePage).sort(sortByMembers);
+  const pages = await Promise.all(links.map(get));
+  return pages.map(page => page.data).map(parsePage).sort(sortByMembers);
 };
 
 module.exports = getMembers;
