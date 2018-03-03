@@ -5,18 +5,18 @@ dashboard for things that I use
 - [ ] Github issues
 - [ ] Toggl timers
 - [ ] Notes (?)
-- [ ] UPSU Leaderboards
+- [x] UPSU Leaderboards
 - [ ] Actually useful links
-- [ ] News
-- [ ] On site load, pass requests off to different web workers for POWER
+- [x] News
+
+~~On site load, pass requests off to different web workers for POWER~~
+- [ ] Run a scheduler and emit socket.io events per scheduled item
 
 ### github issues
-- Websocket driven
 - New issue given a list of issues, should find and notify (notification API + sound)
 - Give a list of repos to track
 
 ### toggl timers
-- socket driven (?) or hacky setInterval timer
 - give a list of things to track
 
 ### Notes
