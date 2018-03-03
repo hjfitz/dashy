@@ -15,6 +15,8 @@ const toggl = axios.create({
 
 const getCurrentEntries = () => toggl.get();
 
+const getCurrentEntry = () => toggl.get('/current');
+
 // getCurrentEntries().then(console.log);
 
 const createEntry = async (desc, ...tags) => {
@@ -38,8 +40,9 @@ const stopCurrentEntry = async () => {
   }
 };
 
-stopCurrentEntry().then(console.log);
-
-const stopById = async id => {
-
+module.exports = {
+  getCurrentEntries,
+  getCurrentEntry,
+  createEntry,
+  stopCurrentEntry,
 };
