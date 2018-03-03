@@ -8,6 +8,7 @@ dashboard for things that I use
 - [ ] UPSU Leaderboards
 - [ ] Actually useful links
 - [ ] News
+- [ ] On site load, pass requests off to different web workers for POWER
 
 ### github issues
 - Websocket driven
@@ -35,6 +36,8 @@ dashboard for things that I use
 ### News
 - Mix of headlines from 
   - dev.to
+    - use twitter api
   - hn
+    - firebase api
   - hackernoon
   - /r/webdev
