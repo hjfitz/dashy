@@ -14,13 +14,12 @@ const getTopFive = async () => {
   const stories = await getStories();
   // trim down stories to only 5
   stories.splice(5);
-  return Promise.all(stories.map(story => get(`${base}/item/${story}.json?print=pretty`)));
+  return Promise.all(stories.map(story => getPage(`${base}/item/${story}.json?print=pretty`)));
 };
 
 const parseStories = async () => {
   const stories = await getTopFive();
   return stories
-    .map(({ data }) => data)
     .map(({ title, url, time }) => ({
       title,
       link: url,
@@ -31,6 +30,6 @@ const parseStories = async () => {
 module.exports = {
   getStories,
   getTopFive,
+  parseStories,
 };
 
-parseStories().then(console.log);
