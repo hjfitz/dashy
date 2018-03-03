@@ -25,6 +25,7 @@ dashboard for things that I use
 ### Leaderboards
 - socket driven
 - realtime info based on https://upsu-leaderboard.herokuapp.com/
+- [ ] move to axios
 
 ### Actually useful links
 - github repos
