@@ -19,5 +19,3 @@ const getSystemInfo = () => {
 };
 
 module.exports = getSystemInfo;
-
-console.log(getSystemInfo());

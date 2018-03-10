@@ -1,11 +1,11 @@
-const { parseContentfulPage: getContentfulStatus } = require('./contentful');
-const {
-  getCurrentStatus: getHerokuStatus,
-  getByNum: getHerokuIssue,
-} = require('./heroku');
+const contentful = require('./contentful');
+const github = require('./github');
+const heroku = require('./heroku');
+const slack = require('./slack');
 
 module.exports = {
-  getContentfulStatus,
-  getHerokuStatus,
-  getHerokuIssue,
+  contentful,
+  github,
+  heroku,
+  slack,
 };
