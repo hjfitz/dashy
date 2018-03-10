@@ -23,7 +23,7 @@ app.use(helmet());
 app.set('port', port);
 
 // files
-app.use('/public', express.static(pub));
+app.use('/', express.static(pub));
 
 // logger
 app.use('*', (req, res, next) => {

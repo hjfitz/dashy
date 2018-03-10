@@ -1,5 +1,6 @@
 const io = require('socket.io');
 const debug = require('debug')('socket');
+const emitAll = require('./scheduler');
 
 const sockets = [];
 
@@ -9,6 +10,8 @@ const emit = (type, payload) => {
 
 const conn = sck => {
   debug(`${sck.id} connected`);
+
+  emitAll();
 
   sockets.push(sck);
 
