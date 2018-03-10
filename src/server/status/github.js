@@ -1,12 +1,6 @@
-const cheerio = require('cheerio');
-const { getPage } = require('../util');
+const { getDOM } = require('../util');
 
 const baseUrl = 'https://status.github.com/messages';
-
-const loadGitPage = async () => {
-  const page = await getPage(baseUrl);
-  return cheerio.load(page);
-};
 
 const parseMessage = message => {
   const [time, status] = Array.from(message.children)
@@ -17,9 +11,8 @@ const parseMessage = message => {
   return { time, status };
 };
 
-
 const getGithubStatus = async () => {
-  const $ = await loadGitPage();
+  const $ = await getDOM(baseUrl);
   const messages = $('.message');
   const casted = Array.from(messages);
   casted.splice(5);
