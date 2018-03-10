@@ -3,7 +3,7 @@ dashboard for things that I use
 
 ## Todo:
 - [ ] Github issues
-- [ ] Toggl timers
+- [x] Toggl timers
 - [ ] Notes (?)
 - [x] UPSU Leaderboards
 - [ ] Actually useful links
@@ -20,24 +20,29 @@ dashboard for things that I use
 - give a list of things to track
 
 ### Notes
-- Stored in a SS redis store
+- Stored in localStorage or redis?
 - make a note!
 
 ### Leaderboards
 - socket driven
 - realtime info based on https://upsu-leaderboard.herokuapp.com/
-- [ ] move to axios
+- [x] move to axios
 
 ### Actually useful links
 - github repos
   - toggle between issue tracker/pull requests/repo
 - ???
 
+### System
+
+### Services
+- [x] Heroku
+- [x] Contentful
+- [x] Github
+- [ ] Slack
+
 ### News
-- Mix of headlines from 
-  - dev.to
-    - use twitter api
-  - hn
-    - firebase api
-  - hackernoon
-  - /r/webdev
+  - [x] dev.to Using RSS
+  - [x] hn using Firebase
+  - [x] hackernoon using RSS
+  - [x] /r/webdev using reddit RESTFul

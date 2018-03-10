@@ -16,6 +16,7 @@
     "crypto-js": "^3.1.9-1",
     "css-loader": "^0.28.10",
     "date-fns": "^1.29.0",
+    "diskusage": "^0.2.4",
     "local-env-var": "^2.0.1",
     "postcss-loader": "^2.1.1",
     "rss-parser": "^3.1.1",
