@@ -26,7 +26,4 @@ const parseContentfulPage = async () => {
 };
 
 // expose all modules for testing
-module.exports = {
-  getContentfulDOM,
-  parseContentfulPage,
-};
+module.exports = parseContentfulPage;
