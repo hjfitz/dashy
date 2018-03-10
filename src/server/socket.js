@@ -3,15 +3,15 @@ const debug = require('debug')('socket');
 
 const sockets = [];
 
-const emitAll = (type, payload) => {
+const emit = (type, payload) => {
   sockets.map(sck => sck.emit(type, payload));
 };
 
 const conn = sck => {
   debug(`${sck.id} connected`);
 
-  // update the list of websocket clients
   sockets.push(sck);
+
   debug(`${sockets.length} total sockets connected`);
 
   // respond to pings
@@ -28,8 +28,9 @@ const conn = sck => {
 const bind = server => {
   // initialise the server
   const sock = io(server);
+  debug('bound to server');
   // add event listeners
   sock.on('connection', conn);
 };
 
-module.exports = { bind, emitAll };
+module.exports = { bind, emit };

@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const path = require('path');
 const debug = require('debug')('http');
 
+debug('started');
+
 const socket = require('./src/server/socket');
 
 // constants
@@ -13,7 +15,6 @@ let port = parseInt(process.env.PORT, 10) || 5000;
 const app = express();
 const pub = path.join(__dirname, 'public');
 const index = path.join(pub, 'index.html');
-const built = path.join(pub, 'build');
 const server = http.createServer(app);
 
 // middleware
@@ -22,7 +23,7 @@ app.use(helmet());
 app.set('port', port);
 
 // files
-app.use('/public', express.static([pub, built]));
+app.use('/public', express.static(pub));
 
 // logger
 app.use('*', (req, res, next) => {
@@ -38,9 +39,9 @@ server.listen(port);
 
 // inform us of the running server
 server.on('listening', () => {
+  debug(`running on ${port}`);
   // don't bind the socket until the server's running
   socket.bind(server);
-  debug(`Running on ${port}`);
 });
 
 // handle ports the lazy way
