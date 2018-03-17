@@ -7,8 +7,8 @@ const getUsedMemory = () => {
   debug('getting memory status');
   const total = os.totalmem();
   const free = os.freemem();
-  const available = total - free;
-  return { available, free, total };
+  const used = total - free;
+  return { used, free, total };
 };
 
 const getSystemInfo = () => {
@@ -17,6 +17,10 @@ const getSystemInfo = () => {
   debug('getting storage');
   const root = diskUsage.checkSync('/');
   const home = diskUsage.checkSync(os.homedir());
+  [root, home].forEach(partition => {
+    partition.used = partition.total - partition.free;
+    delete partition.available;
+  });
   const disk = { root, home };
   return { mem, disk };
 };
