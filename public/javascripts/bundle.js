@@ -27130,7 +27130,7 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_mo
 
 var _socket = _interopRequireDefault(__webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js"));
 
-var _parse = __webpack_require__(/*! ./partial/parse */ "./src/client/partial/parse.jsx");
+var _partial = __webpack_require__(/*! ./partial */ "./src/client/partial/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27191,9 +27191,18 @@ function (_Component) {
         return _react.default.createElement("h1", null, "Loading");
       }
 
-      var systemStatus = (0, _parse.parseSys)(this.state.system);
-      var news = (0, _parse.parseNews)(this.state.news);
-      return [systemStatus];
+      var _state = this.state,
+          system = _state.system,
+          news = _state.news; // const systemStatus = parseSys(this.state.system);
+
+      return [_react.default.createElement(_partial.Sys, {
+        key: "sys",
+        mem: system.mem,
+        disk: system.disk
+      }), _react.default.createElement(_partial.News, {
+        key: "news",
+        sources: news
+      })];
     }
   }]);
 
@@ -27204,10 +27213,10 @@ exports.default = Dashboard;
 
 /***/ }),
 
-/***/ "./src/client/partial/parse.jsx":
-/*!**************************************!*\
-  !*** ./src/client/partial/parse.jsx ***!
-  \**************************************/
+/***/ "./src/client/partial/index.js":
+/*!*************************************!*\
+  !*** ./src/client/partial/index.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27217,26 +27226,90 @@ exports.default = Dashboard;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.parseNews = exports.parseSys = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+Object.defineProperty(exports, "Sys", {
+  enumerable: true,
+  get: function get() {
+    return _sys.default;
+  }
+});
+Object.defineProperty(exports, "News", {
+  enumerable: true,
+  get: function get() {
+    return _news.default;
+  }
+});
 
 var _sys = _interopRequireDefault(__webpack_require__(/*! ./sys */ "./src/client/partial/sys.jsx"));
 
+var _news = _interopRequireDefault(__webpack_require__(/*! ./news */ "./src/client/partial/news.jsx"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var parseSys = function parseSys(system) {
-  return _react.default.createElement(_sys.default, {
-    mem: system.mem,
-    disk: system.disk
+/***/ }),
+
+/***/ "./src/client/partial/news.jsx":
+/*!*************************************!*\
+  !*** ./src/client/partial/news.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Top5 = function Top5(_ref) {
+  var stories = _ref.stories;
+  return stories.map(function (story) {
+    var title = story.title,
+        link = story.link,
+        published = story.published;
+    return [_react.default.createElement("h2", {
+      key: title
+    }, _react.default.createElement("a", {
+      href: link
+    }, title)), _react.default.createElement("span", {
+      key: title + published,
+      className: "published"
+    }, published)];
   });
 };
 
-exports.parseSys = parseSys;
+var NewsProvider = function NewsProvider(_ref2) {
+  var title = _ref2.title,
+      stories = _ref2.stories;
+  stories.splice(3);
+  return [_react.default.createElement("h1", {
+    key: title
+  }, title), _react.default.createElement(Top5, {
+    stories: stories
+  })];
+};
 
-var parseNews = function parseNews(news) {};
+var _default = function _default(_ref3) {
+  var sources = _ref3.sources;
+  var parsed = Object.keys(sources).map(function (source) {
+    var cur = sources[source];
+    return _react.default.createElement(NewsProvider, {
+      title: source,
+      stories: cur
+    });
+  });
+  console.log(sources);
+  return [_react.default.createElement("h2", {
+    key: "news-title"
+  }, "news"), parsed];
+};
 
-exports.parseNews = parseNews;
+exports.default = _default;
 
 /***/ }),
 

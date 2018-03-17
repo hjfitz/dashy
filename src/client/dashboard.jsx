@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
-import { parseNews, parseSys } from './partial/parse';
+import { Sys, News } from './partial';
+
 
 const initialState = {
   news: {},
@@ -27,10 +28,11 @@ export default class Dashboard extends Component {
     if (!this.state.loaded) {
       return <h1>Loading</h1>;
     }
-    const systemStatus = parseSys(this.state.system);
-    const news = parseNews(this.state.news);
+    const { system, news } = this.state;
+    // const systemStatus = parseSys(this.state.system);
     return [
-      systemStatus,
+      <Sys key="sys" mem={system.mem} disk={system.disk} />,
+      <News key="news" sources={news} />,
     ];
   }
 }
