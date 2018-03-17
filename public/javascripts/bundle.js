@@ -27187,22 +27187,21 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      if (!this.state.loaded) {
-        return _react.default.createElement("h1", null, "Loading");
-      }
-
+      if (!this.state.loaded) return _react.default.createElement("h1", null, "Loading");
       var _state = this.state,
           system = _state.system,
-          news = _state.news; // const systemStatus = parseSys(this.state.system);
-
-      return [_react.default.createElement(_partial.Sys, {
-        key: "sys",
+          news = _state.news,
+          status = _state.status;
+      return _react.default.createElement("main", {
+        className: "dashy"
+      }, _react.default.createElement(_partial.Sys, {
         mem: system.mem,
         disk: system.disk
+      }), _react.default.createElement(_partial.Status, {
+        sources: status
       }), _react.default.createElement(_partial.News, {
-        key: "news",
         sources: news
-      })];
+      }));
     }
   }]);
 
@@ -27238,10 +27237,18 @@ Object.defineProperty(exports, "News", {
     return _news.default;
   }
 });
+Object.defineProperty(exports, "Status", {
+  enumerable: true,
+  get: function get() {
+    return _status.default;
+  }
+});
 
 var _sys = _interopRequireDefault(__webpack_require__(/*! ./sys */ "./src/client/partial/sys.jsx"));
 
 var _news = _interopRequireDefault(__webpack_require__(/*! ./news */ "./src/client/partial/news.jsx"));
+
+var _status = _interopRequireDefault(__webpack_require__(/*! ./status */ "./src/client/partial/status/index.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27272,14 +27279,14 @@ var Top5 = function Top5(_ref) {
     var title = story.title,
         link = story.link,
         published = story.published;
-    return [_react.default.createElement("h2", {
-      key: title
-    }, _react.default.createElement("a", {
+    return _react.default.createElement("div", {
+      key: title,
+      className: "news-item"
+    }, _react.default.createElement("h2", null, _react.default.createElement("a", {
       href: link
     }, title)), _react.default.createElement("span", {
-      key: title + published,
       className: "published"
-    }, published)];
+    }, published));
   });
 };
 
@@ -27287,11 +27294,12 @@ var NewsProvider = function NewsProvider(_ref2) {
   var title = _ref2.title,
       stories = _ref2.stories;
   stories.splice(3);
-  return [_react.default.createElement("h1", {
-    key: title
-  }, title), _react.default.createElement(Top5, {
+  return _react.default.createElement("div", {
+    key: title,
+    className: "news-provider"
+  }, _react.default.createElement("h1", null, title), _react.default.createElement(Top5, {
     stories: stories
-  })];
+  }));
 };
 
 var _default = function _default(_ref3) {
@@ -27299,14 +27307,204 @@ var _default = function _default(_ref3) {
   var parsed = Object.keys(sources).map(function (source) {
     var cur = sources[source];
     return _react.default.createElement(NewsProvider, {
+      key: source,
       title: source,
       stories: cur
     });
   });
-  console.log(sources);
-  return [_react.default.createElement("h2", {
+  return _react.default.createElement("section", {
+    className: "news-container"
+  }, _react.default.createElement("h2", {
     key: "news-title"
-  }, "news"), parsed];
+  }, "news"), parsed);
+};
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/client/partial/status/contentful.jsx":
+/*!**************************************************!*\
+  !*** ./src/client/partial/status/contentful.jsx ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(_ref) {
+  var status = _ref.status;
+  var statusItems = Object.keys(status).map(function (item) {
+    return _react.default.createElement("h3", {
+      key: item
+    }, item, ": ", status[item]);
+  });
+  return _react.default.createElement("section", {
+    className: "status contentful"
+  }, _react.default.createElement("h1", null, "Contentful"), statusItems);
+};
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/client/partial/status/github.jsx":
+/*!**********************************************!*\
+  !*** ./src/client/partial/status/github.jsx ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(_ref) {
+  var status = _ref.status;
+  var updated = status.time,
+      curStatus = status.status;
+  return _react.default.createElement("section", {
+    className: "status github"
+  }, _react.default.createElement("h1", null, "Github"), _react.default.createElement("h3", null, "Current Status: ", curStatus), _react.default.createElement("h3", null, "Last Updated: ", updated));
+};
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/client/partial/status/heroku.jsx":
+/*!**********************************************!*\
+  !*** ./src/client/partial/status/heroku.jsx ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(_ref) {
+  var status = _ref.status;
+
+  if ('issues' in status.status) {
+    console.warn('issue on heroku');
+  }
+
+  var _status$status = status.status,
+      Production = _status$status.Production,
+      Development = _status$status.Development;
+  return _react.default.createElement("div", {
+    className: "status heroku"
+  }, _react.default.createElement("h1", null, "Heroku"), _react.default.createElement("h3", null, "Production: ", Production), _react.default.createElement("h3", null, "Development: ", Development));
+};
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/client/partial/status/index.jsx":
+/*!*********************************************!*\
+  !*** ./src/client/partial/status/index.jsx ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _slack = _interopRequireDefault(__webpack_require__(/*! ./slack */ "./src/client/partial/status/slack.jsx"));
+
+var _contentful = _interopRequireDefault(__webpack_require__(/*! ./contentful */ "./src/client/partial/status/contentful.jsx"));
+
+var _heroku = _interopRequireDefault(__webpack_require__(/*! ./heroku */ "./src/client/partial/status/heroku.jsx"));
+
+var _github = _interopRequireDefault(__webpack_require__(/*! ./github */ "./src/client/partial/status/github.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(_ref) {
+  var sources = _ref.sources;
+  console.log(sources);
+  return _react.default.createElement("section", {
+    className: "status-container"
+  }, _react.default.createElement(_slack.default, {
+    status: sources.slack
+  }), _react.default.createElement(_github.default, {
+    status: sources.github[0]
+  }), _react.default.createElement(_heroku.default, {
+    status: sources.heroku
+  }), _react.default.createElement(_contentful.default, {
+    status: sources.contentful
+  }));
+};
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/client/partial/status/slack.jsx":
+/*!*********************************************!*\
+  !*** ./src/client/partial/status/slack.jsx ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default(_ref) {
+  var status = _ref.status;
+  var curStatus = status.status,
+      statusMessage = status.statusMessage;
+  return _react.default.createElement("div", {
+    className: "status slack"
+  }, _react.default.createElement("h2", null, "Slack"), _react.default.createElement("h3", {
+    className: "slack-status"
+  }, curStatus), _react.default.createElement("h3", {
+    className: "slack-message"
+  }, statusMessage));
 };
 
 exports.default = _default;

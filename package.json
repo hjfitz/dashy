@@ -9,7 +9,10 @@
   "private": true,
   "scripts": {
     "lint": "eslint src/",
-    "start": "DEBUG=dash:* node serve"
+    "local": "DEBUG=dash:* node serve",
+    "prod": "node server",
+    "postinstall": "webpack --mode=production",
+    "dev": "webpack --mode=development -w"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.40",
