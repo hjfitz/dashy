@@ -3,11 +3,11 @@ const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');
 const path = require('path');
-const debug = require('debug')('http');
+const debug = require('debug')('dash:http');
 
 debug('started');
 
-const socket = require('./src/server/socket');
+const socket = require('./src/server/socket-server');
 
 // constants
 let port = parseInt(process.env.PORT, 10) || 5000;

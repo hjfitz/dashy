@@ -44,7 +44,7 @@ module.exports = {
   devtool: 'source-map',
   resolve: { extensions: ['.js', '.jsx', '.json', '.css'] },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
         exclude: /node_modules/,

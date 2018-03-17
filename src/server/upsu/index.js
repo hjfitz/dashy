@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const debug = require('debug')('upsu');
 const { get } = require('axios');
 
 const soclist = 'https://membership.upsu.net/';
@@ -13,6 +14,7 @@ const membersDOM = '.label.bg.upsu';
  * pull the links out with some magic
  */
 const getLinks = async () => {
+  debug('beginning scrape of main soc site');
   const htmlString = await get(soclist);
   const $ = cheerio.load(htmlString.data);
   const links = Array.from($(linkDOM));
@@ -38,6 +40,7 @@ const parsePage = page => {
 
   // it's assumed that the slug is based on the soc name
   // but all lowers and hyphenated
+  debug('parsing link for society');
   const linkSuffix = title
     .replace(/\([a-zA-Z]*\)/gi, '')
     .trim()
@@ -45,6 +48,7 @@ const parsePage = page => {
     .toLowerCase();
 
   const link = `https://membership.upsu.net/group/${linkSuffix}`;
+  debug('parsing member count');
   const members = getText($(membersDOM)).replace(/ Members/, '');
   return { title, link, members };
 };

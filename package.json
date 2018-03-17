@@ -9,13 +9,14 @@
   "private": true,
   "scripts": {
     "lint": "eslint src/",
-    "start": "DEBUG=*,-express:* node serve"
+    "start": "DEBUG=dash:* node serve"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
     "@babel/preset-react": "^7.0.0-beta.40",
     "axios": "^0.18.0",
+    "babel-loader": "^8.0.0-beta",
     "cheerio": "^1.0.0-rc.2",
     "compression": "^1.7.2",
     "crypto-js": "^3.1.9-1",
@@ -28,12 +29,16 @@
     "local-env-var": "^2.0.1",
     "node-cron": "^1.2.1",
     "postcss-loader": "^2.1.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "rss-parser": "^3.1.1",
     "rss-to-json": "^1.0.4",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4",
     "style-loader": "^0.20.2",
-    "webpack": "^4.0.1"
+    "webpack": "^4.0.1",
+    "webpack-build-notifier": "^0.1.23",
+    "webpack-cli": "^2.0.12"
   },
   "devDependencies": {
     "eslint": "^4.18.2",
