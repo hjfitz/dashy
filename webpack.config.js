@@ -39,7 +39,7 @@ const sassConfig =
       loader: 'sass-loader',
       options: {
         includePaths: [
-          require('path').resolve(__dirname, 'node_modules'),
+          path.resolve(__dirname, 'node_modules'),
         ],
       },
     },
@@ -47,7 +47,9 @@ const sassConfig =
 
 
 module.exports = {
-  entry: { bundle: ['./src/client/router.jsx'] },
+  entry: {
+    bundle: ['./src/client/router.jsx'],
+  },
   output: { filename: '[name].js', path: output },
   devtool: 'source-map',
   resolve: { extensions: ['.js', '.jsx', '.json', '.sass'] },
