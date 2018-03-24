@@ -31,8 +31,10 @@ export default class Dashboard extends Component {
     return (
       <main className="dashy">
         <Sys mem={system.mem} disk={system.disk} />
-        <Status sources={status} />
-        <News sources={news} />
+        <div className="container">
+          <Status sources={status} />
+          <News sources={news} />
+        </div>
       </main>
     );
   }

@@ -6,11 +6,15 @@ export default ({ status }) => {
   }
   const { Production, Development } = status.status;
   return (
-    <div className="status heroku">
-      <h1>Heroku</h1>
-      <h3>Production: {Production}</h3>
-      <h3>Development: {Development}</h3>
-    </div>
+    <section className="status heroku col col-md-6">
+      <div className="card">
+        <div className="card-body">
+          <h2 className="card-title">Heroku</h2>
+          <h5><span className="status-prefix">Production:</span> {Production}</h5>
+          <h5><span className="status-prefix">Development:</span> {Development}</h5>
+        </div>
+      </div>
+    </section>
   );
 };
 

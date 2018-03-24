@@ -1,0 +1,77 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+body 
+  margin: 0;
+  font-family: sans-serif;
+
+
+#react 
+  min-height: 100vh;
+
+
+.sysinfo 
+  background-color: #263238;
+  color: #fafafa;
+  font-family: monospace;
+  display: flex;
+
+
+.sysinfo > div
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+
+
+.sysinfo-title 
+  margin: 0 8px;
+  display: inline-block;
+  min-width: 44px;
+
+
+.sysinfo-prefix 
+  margin: 0 12px;
+
+
+.sysinfo-prefix.free 
+  color: #689f38;
+
+
+.sysinfo-prefix.total 
+  color: #00838f;
+
+
+.sysinfo-prefix.avail 
+  color: #f06292;
+
+.row
+  padding: 10px;
+
+.news-provider.card
+  margin: 10px;
+
+.status
+  display: flex;
+
+  .card
+    flex: 1;
+
+  .status-prefix
+    font-weight: 600;
+
+
+
+.contentful
+  .card-title
+    color: #ee5c67;
+
+.heroku
+  .card-title
+    color: #484599;
+
+.slack
+  .card-title
+    color: #40b891;
+
+.github
+  .card-title
+    color: #0e2636;

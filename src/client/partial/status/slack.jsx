@@ -3,11 +3,15 @@ import React from 'react';
 export default ({ status }) => {
   const { status: curStatus, statusMessage } = status;
   return (
-    <div className="status slack">
-      <h2>Slack</h2>
-      <h3 className="slack-status">{curStatus}</h3>
-      <h3 className="slack-message">{statusMessage}</h3>
-    </div>
+    <section className="status slack col col-md-6">
+      <div className="card">
+        <div className="card-body">
+          <h2 className="card-title">Slack</h2>
+          <h5> <span className="status-prefix">Current Status:</span> {curStatus}</h5>
+          <h5> <span className="status-prefix">Status Message:</span> {statusMessage}</h5>
+        </div>
+      </div>
+    </section>
   );
 };
 

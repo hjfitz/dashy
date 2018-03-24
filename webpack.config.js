@@ -30,11 +30,19 @@ const babelConfig = {
   ],
 };
 
-const cssConfig =
+const sassConfig =
   [
     { loader: 'style-loader' },
     { loader: 'css-loader', options: { importLoaders: 1 } },
     { loader: 'postcss-loader' },
+    {
+      loader: 'sass-loader',
+      options: {
+        includePaths: [
+          require('path').resolve(__dirname, 'node_modules'),
+        ],
+      },
+    },
   ];
 
 
@@ -42,13 +50,12 @@ module.exports = {
   entry: { bundle: ['./src/client/router.jsx'] },
   output: { filename: '[name].js', path: output },
   devtool: 'source-map',
-  resolve: { extensions: ['.js', '.jsx', '.json', '.css'] },
+  resolve: { extensions: ['.js', '.jsx', '.json', '.sass'] },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: cssConfig,
+        test: /\.(sass|scss)$/,
+        use: sassConfig,
       },
       {
         test: /\.jsx?$/,
