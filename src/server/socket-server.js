@@ -52,13 +52,16 @@ const updateStatus = async () => {
 
 const updateNews = async () => {
   debug('updating news');
-  const [hn, hnoon, tpd] = await Promise.all([
+  const [hn, hnoon, tpd, reddit] = await Promise.all([
     news.getHackerNews(),
     news.getHackerNoon(),
     news.getPracticalDev(),
+    news.getBySub('webdev'),
   ]);
 
-  const newNews = { hn, hnoon, tpd };
+  const newNews = {
+    hn, hnoon, tpd, reddit,
+  };
   curStatus.news = newNews;
 };
 

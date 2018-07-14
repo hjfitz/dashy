@@ -4,6 +4,7 @@ const titleLookup = {
   hn: 'Hacker News',
   hnoon: 'Hacker Noon',
   tpd: 'The Practical Developer',
+  reddit: 'Reddit',
 };
 
 const Top5 = ({ stories }) => stories.map(story => {
